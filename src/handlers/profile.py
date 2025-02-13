@@ -3,9 +3,9 @@ from aiogram import Router, F
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
 from aiogram.types import Message, CallbackQuery
-from keyboards.edit_gender import edit_gender_kb
-from keyboards.edit_profile import edit_profile_kb
-from user import User
+from src.keyboards.edit_gender import edit_gender_kb
+from src.keyboards.edit_profile import edit_profile_kb
+from src.user import User
 
 user = User()
 

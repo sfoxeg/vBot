@@ -1,4 +1,3 @@
-
 # Определяем список сервисов — services
 # Эти сервисы будут частью нашего приложения
 services:
@@ -12,9 +11,9 @@ services:
       # Имя Docker-файла из которого будет собран образ
       dockerfile: Dockerfile
       # Команда, которая будет выполнена после старта сервиса
-    entrypoint: ["sh", "-c", "alembic upgrade head && python ./main.py"]
-    #command: alembic upgrade head && python ./main.py
-    environment:
+    entrypoint: [ "sh", "-c", "alembic upgrade head && python ./main.py" ]
+
+    environment: # Заполняем переменные окружения
       BOT_TOKEN: ${BOT_TOKEN}
     ports: # Проброс портов
       - "3000:8000"
@@ -44,4 +43,4 @@ services:
       - pgdata:/var/lib/postgresql/data
 
 volumes:
-    pgdata:
+  pgdata:
