@@ -16,7 +16,7 @@ RUN apt update -y -q \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /app/
+WORKDIR /app/src/
 
 ADD requirements.txt /app/
 
