@@ -1,6 +1,6 @@
 from argparse import ArgumentParser
 from database import engine, Base
-from models import UsersOrm
+from models import UsersOrm  # noqa
 
 if __name__ == '__main__':
     parser = ArgumentParser()
