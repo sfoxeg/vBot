@@ -1,7 +1,8 @@
 from aiogram import Router
 from aiogram.filters import CommandStart
 from aiogram.types import Message
-from src import user
+
+from src.user import user
 from src.keyboards.for_pofile import get_profile_kb
 
 router = Router()
