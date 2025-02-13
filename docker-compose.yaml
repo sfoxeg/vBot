@@ -20,8 +20,6 @@ services:
       DB_NAME: ${DB_NAME}
       DB_USER: ${DB_USER}
       DB_PASS: ${DB_PASS}
-    ports: # Проброс портов
-      - "3000:8000"
     # Перечисляем тома (volumes)
     # Они будут подключены к файловой системе сервиса
     # Например, все что находится в . мы увидим в директории /app
@@ -40,6 +38,7 @@ services:
     container_name: vbot-db
     # Имя образа. Здесь мы используем базу данных Postgres
     image: postgres:latest
+    hostname: postgres
     ports:
       - "5432:5432"
     environment:
