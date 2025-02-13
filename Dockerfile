@@ -17,6 +17,7 @@ RUN apt update -y -q \
     && rm -rf /var/lib/apt/lists/*
 RUN pip install --upgrade pip
 RUN pip install -U --no-cache-dir psycopg2-binary
+RUN pip install -r requirements.txt
 
 ADD main.py /app/
 
