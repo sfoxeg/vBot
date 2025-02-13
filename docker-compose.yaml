@@ -13,6 +13,8 @@ services:
       dockerfile: Dockerfile
       # Команда, которая будет выполнена после старта сервиса
     command: python ./main.py
+    environment:
+      BOT_TOKEN: ${BOT_TOKEN}
     ports: # Проброс портов
       - "3000:8000"
     # Перечисляем тома (volumes)
