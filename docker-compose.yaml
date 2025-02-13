@@ -33,6 +33,8 @@ services:
     # Сервис будет запущен, только после старта db
     depends_on:
       - vbot-db
+    networks:
+      - mynet
 
   vbot-db:
     container_name: vbot-db
@@ -48,6 +50,12 @@ services:
       POSTGRES_PASSWORD: ${DB_PASS}
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      - mynet
 
 volumes:
   pgdata:
+
+networks:
+  mynet:
+    name: my-shared-db-network
