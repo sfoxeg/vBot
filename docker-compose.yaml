@@ -11,7 +11,7 @@ services:
       # Имя Docker-файла из которого будет собран образ
       dockerfile: Dockerfile
       # Команда, которая будет выполнена после старта сервиса
-    entrypoint: [ "sh", "-c", "alembic upgrade head && python ./src/main.py" ]
+    entrypoint: [ "sh", "-c", "alembic upgrade head && python3 ./src/main.py" ]
 
     environment: # Заполняем переменные окружения
       BOT_TOKEN: ${BOT_TOKEN}
