@@ -10,16 +10,15 @@ from models import UsersOrm  # noqa
 # access to the values within the .ini file in use.
 config = context.config
 
-url = URL.create(drivername='postgresql+psycopg2',
-                 username=os.environ.get('DB_USER'),
-                 password=os.environ.get('DB_PASS'),
-                 database=os.environ.get('DB_NAME'),
-                 host=os.environ.get('DB_HOST'),
-                 port=os.environ.get('DB_PORT'))
+DB_HOST = os.environ.get('DB_HOST')
+DB_PORT = os.environ.get('DB_PORT')
+DB_NAME = os.environ.get('DB_NAME')
+DB_USER = os.environ.get('DB_USER')
+DB_PASS = os.environ.get('DB_PASS')
 
-u = str(url)
-print(f'----------{u}----------------------------')
-config.set_main_option("sqlalchemy.url", str(url))
+url =str(f'postgresql+psycopg2://{DB_NAME}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}')
+
+config.set_main_option("sqlalchemy.url", url)
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.

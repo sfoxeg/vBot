@@ -20,5 +20,5 @@ class UsersOrm(Base):
     age: Mapped[int | None]
     desc: Mapped[str | None]
     photo: Mapped[str | None]
-    # created_at: Mapped[created_at]
-    # updated_at: Mapped[updated_at]
+    created_at: Mapped[created_at]
+    updated_at: Mapped[updated_at]
