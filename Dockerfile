@@ -4,12 +4,6 @@ RUN apt update -y -q \
     && apt install -y -q --no-install-recommends \
     build-essential \
     freetds-bin \
-    krb5-user \
-    ldap-utils \
-    libffi6 \
-    libsasl2-2 \
-    libsasl2-modules \
-    libssl1.1 \
     locales \
     lsb-release \
     sasl2-bin \
