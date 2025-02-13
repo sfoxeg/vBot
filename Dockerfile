@@ -20,5 +20,8 @@ RUN pip install -U --no-cache-dir psycopg2-binary
 RUN pip install -r requirements.txt
 
 ADD main.py /app/
+ADD requirements.txt /app/
 
 WORKDIR /app/
+
+RUN pip install -r requirements.txt
