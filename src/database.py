@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
 
-url='sqlite:///sqlite3.db'
+url = 'sqlite:///sqlite3.db'
 
 engine = create_engine(url=url, echo=False)
 
