@@ -15,6 +15,11 @@ services:
 
     environment: # Заполняем переменные окружения
       BOT_TOKEN: ${BOT_TOKEN}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
     ports: # Проброс портов
       - "3000:8000"
     # Перечисляем тома (volumes)
