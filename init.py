@@ -8,7 +8,6 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    '''Есть ли дополнительный параметр? Тогда добавим еще строчку в шаблон'''
     if args.create:
         print("Drop tables")
         Base.metadata.drop_all(engine)
