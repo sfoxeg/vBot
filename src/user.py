@@ -15,37 +15,41 @@ class User:
         self.id = None
 
     def get_profile(self, chat_id: str):
+        self.reg(chat_id)
         with session_factory() as session:
             query = select(UsersOrm).filter_by(chat_id=chat_id)
             result = session.execute(query).scalars().first()
-            user = result
+            usr = result
 
-            if user:
-                self.id = user.id
-                self.chat_id = user.chat_id
-                self.name = user.name
-                self.age = user.age
-                self.desc = user.desc
-                self.gender = user.gender
-                self.photo = user.photo
+            if usr:
+                self.id = usr.id
+                self.chat_id = usr.chat_id
+                self.name = usr.name
+                self.age = usr.age
+                self.desc = usr.desc
+                self.gender = usr.gender
+                self.photo = usr.photo
 
-    def update_profile(self, chat_id: str):
+    def update_profile(self):
         with session_factory() as session:
-            user = session.get(UsersOrm, self.id)
-            user.chat_id = self.chat_id
-            user.name = self.name
-            user.age = self.age
-            user.desc = self.desc
-            user.gender = self.gender
-            user.photo = self.photo
+            usr = session.get(UsersOrm, self.id)
+            usr.chat_id = self.chat_id
+            usr.name = self.name
+            usr.age = self.age
+            usr.desc = self.desc
+            usr.gender = self.gender
+            usr.photo = self.photo
             session.commit()
 
+    @staticmethod
+    def reg(chat_id: str) -> None:
+        with session_factory() as session:
+            query = select(UsersOrm.chat_id).filter_by(chat_id=chat_id)
+            result = session.execute(query)
+            usr = result.first()
+            if usr is None:
+                session.add(UsersOrm(chat_id=chat_id))
+                session.commit()
 
-def reg_user(chat_id: str) -> None:
-    with session_factory() as session:
-        query = select(UsersOrm.chat_id).filter_by(chat_id=chat_id)
-        result = session.execute(query)
-        user = result.first()
-        if user is None:
-            session.add(UsersOrm(chat_id=chat_id))
-            session.commit()
+
+user = User()

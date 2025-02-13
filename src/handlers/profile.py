@@ -5,9 +5,7 @@ from aiogram.fsm.state import StatesGroup, State
 from aiogram.types import Message, CallbackQuery
 from src.keyboards.edit_gender import edit_gender_kb
 from src.keyboards.edit_profile import edit_profile_kb
-from src.user import User
-
-user = User()
+from src.user import user
 
 router = Router()
 
@@ -31,7 +29,7 @@ class EditProfile(StatesGroup):
 @router.callback_query(F.data == "profile")
 async def edit_profile(callback: CallbackQuery):
     user.get_profile(str(callback.from_user.id))
-    user.update_profile(str(callback.from_user.id))
+    user.update_profile()
     if user.gender:
         gender = 'М'
     else:
@@ -67,7 +65,7 @@ async def edit_name(message: Message):
     await message.answer(text="Спасибо")
     user.get_profile(str(message.from_user.id))
     user.name = message.text
-    user.update_profile(str(message.from_user.id))
+    user.update_profile()
 
 
 @router.callback_query(F.data == "edit_gender")
@@ -85,7 +83,7 @@ async def gender(callback: CallbackQuery):
         user.gender = True
     elif callback.data.lower() == 'f':
         user.gender = False
-    user.update_profile(str(callback.from_user.id))
+    user.update_profile()
     await callback.answer()
 
 
@@ -101,7 +99,7 @@ async def edit_desc(message: Message):
     await message.answer(text="Спасибо")
     user.get_profile(str(message.from_user.id))
     user.desc = message.text
-    user.update_profile(str(message.from_user.id))
+    user.update_profile()
 
 
 @router.callback_query(F.data == "edit_age")
@@ -121,7 +119,7 @@ async def edit_age(message: Message, state: FSMContext):
 
     user.get_profile(str(message.from_user.id))
     user.age = int(message.text)
-    user.update_profile(str(message.from_user.id))
+    user.update_profile()
     await state.update_data(age=check_age)
     await message.answer('Збс')
 
@@ -137,4 +135,4 @@ async def edit_photo_cmd(callback: CallbackQuery, state: FSMContext):
 async def get_photo(message: Message):
     user.get_profile(str(message.from_user.id))
     user.photo = str(message.photo[-1].file_id)
-    user.update_profile(str(message.from_user.id))
+    user.update_profile()

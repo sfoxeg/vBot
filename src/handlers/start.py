@@ -1,7 +1,7 @@
 from aiogram import Router
 from aiogram.filters import CommandStart
 from aiogram.types import Message
-from src.user import reg_user
+from src import user
 from src.keyboards.for_pofile import get_profile_kb
 
 router = Router()
@@ -9,7 +9,7 @@ router = Router()
 
 @router.message(CommandStart())
 async def cmd_start(message: Message):
-    reg_user(str(message.from_user.id))
+    user.reg(str(message.from_user.id))
     await message.answer(
         "Привет, друх. По всей видимости меня, в сущности бездушный скрипт, \
 для своих коварных целей собирается эксплуатировать очередной мешок ливера.\n\n\
