@@ -23,4 +23,4 @@ ADD requirements.txt /app/
 RUN pip install --upgrade pip
 RUN pip install -U --no-cache-dir psycopg2-binary
 RUN pip install -r /app/requirements.txt
-ENTRYPOINT ["python3 init.py", "create"]
+
