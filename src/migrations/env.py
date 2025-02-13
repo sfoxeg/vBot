@@ -1,15 +1,25 @@
+import os
 from logging.config import fileConfig
-from sqlalchemy import engine_from_config
+from sqlalchemy import engine_from_config, URL
 from sqlalchemy import pool
 from alembic import context
-from database import Base, url
+from database import Base  # noqa
 from models import UsersOrm  # noqa
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
 
-config.set_main_option("sqlalchemy.url", url)
+url = URL.create(drivername='postgresql+psycopg2',
+                 username=os.environ.get('DB_USER'),
+                 password=os.environ.get('DB_PASS'),
+                 database=os.environ.get('DB_NAME'),
+                 host=os.environ.get('DB_HOST'),
+                 port=os.environ.get('DB_PORT'))
+
+u = str(url)
+print(f'----------{u}----------------------------')
+config.set_main_option("sqlalchemy.url", str(url))
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
