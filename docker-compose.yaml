@@ -31,8 +31,6 @@ services:
     # Сервис будет запущен, только после старта db
     depends_on:
       - vbot-db
-    networks:
-      - mynet
 
   vbot-db:
     container_name: vbot-db
@@ -49,12 +47,6 @@ services:
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
       - ./pgdata:/var/lib/postgresql/data/pgdata
-    networks:
-      - mynet
 
 volumes:
   pgdata:
-
-networks:
-  mynet:
-    name: my-shared-db-network
