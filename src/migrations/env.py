@@ -17,7 +17,7 @@ DB_USER = os.environ.get('DB_USER')
 DB_PASS = os.environ.get('DB_PASS')
 
 url = str(f'postgresql+psycopg2://{DB_NAME}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}')
-
+print (url)
 config.set_main_option("sqlalchemy.url", url)
 
 # Interpret the config file for Python logging.
