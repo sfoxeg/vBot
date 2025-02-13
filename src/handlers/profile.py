@@ -3,9 +3,9 @@ from aiogram import Router, F
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
 from aiogram.types import Message, CallbackQuery
-from src.keyboards.edit_gender import edit_gender_kb
-from src.keyboards.edit_profile import edit_profile_kb
-from src.user import user
+from keyboards.edit_gender import edit_gender_kb
+from keyboards.edit_profile import edit_profile_kb
+from user import user
 
 router = Router()
 
@@ -36,10 +36,10 @@ async def edit_profile(callback: CallbackQuery):
     else:
         gender = 'Ж'
 
-    text = (f"Имя: {user.name}\n" \
-            f"Пол: {gender}\n" \
+    text = (f"Имя: {user.name}\n"
+            f"Пол: {gender}\n"
             f"Возраст: {user.age}\n"
-            f"О себе: {user.desc}\n",)
+            f"О себе: {user.desc}\n")
 
     if user.photo:
         await (callback.message.answer_photo(photo=user.photo, caption=text, reply_markup=edit_profile_kb()))
