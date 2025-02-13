@@ -3,7 +3,7 @@ from logging.config import fileConfig
 from sqlalchemy import engine_from_config, URL
 from sqlalchemy import pool
 from alembic import context
-from database import Base  # noqa
+from database import Base, url  # noqa
 from models import UsersOrm  # noqa
 
 # this is the Alembic Config object, which provides
@@ -16,9 +16,11 @@ DB_NAME = os.environ.get('DB_NAME')
 DB_USER = os.environ.get('DB_USER')
 DB_PASS = os.environ.get('DB_PASS')
 
-url = str(f'postgresql+psycopg2://{DB_NAME}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}')
-print (url)
-config.set_main_option("sqlalchemy.url", url)
+'''url = str(f'postgresql+psycopg2://{DB_NAME}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}')
+'''
+
+print (str(url))
+config.set_main_option("sqlalchemy.url", str(url))
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
