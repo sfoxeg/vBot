@@ -12,7 +12,8 @@ services:
       # Имя Docker-файла из которого будет собран образ
       dockerfile: Dockerfile
       # Команда, которая будет выполнена после старта сервиса
-    command: alembic upgrade head && python ./main.py
+    entrypoint: ["sh", "-c", "alembic upgrade head && python ./main.py"]
+    #command: alembic upgrade head && python ./main.py
     environment:
       BOT_TOKEN: ${BOT_TOKEN}
     ports: # Проброс портов
