@@ -30,24 +30,21 @@ class EditProfile(StatesGroup):
 async def edit_profile(callback: CallbackQuery):
     user.get_profile(str(callback.from_user.id))
     user.update_profile()
+
     if user.gender:
         gender = 'М'
     else:
         gender = 'Ж'
 
+    text = (f"Имя: {user.name}\n" \
+            f"Пол: {gender}\n" \
+            f"Возраст: {user.age}\n"
+            f"О себе: {user.desc}\n",)
+
     if user.photo:
-        await (callback.message.answer_photo(photo=user.photo,
-                                             caption=f"Имя: {user.name}\n"
-                                                     f"Пол: {gender}\n"
-                                                     f"Возраст: {user.age}\n"
-                                                     f"О себе: {user.desc}\n",
-                                             reply_markup=edit_profile_kb()))
+        await (callback.message.answer_photo(photo=user.photo, caption=text, reply_markup=edit_profile_kb()))
     else:
-        await (callback.message.answer(text=f"Имя: {user.name}\n"
-                                            f"Пол: {gender}\n"
-                                            f"Возраст: {user.age}\n"
-                                            f"О себе: {user.desc}\n",
-                                       reply_markup=edit_profile_kb()))
+        await (callback.message.answer(text=text, reply_markup=edit_profile_kb()))
 
     await callback.answer()
 
