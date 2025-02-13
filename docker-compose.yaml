@@ -4,6 +4,7 @@
 services:
 
   app: # Имя сервиса
+    container_name: vbot-app
     build:
       # Контекст для сборки образа,
       # в данном случае, текущая директория
@@ -27,6 +28,7 @@ services:
       - vbot-db
 
   vbot-db:
+    container_name: vbot-db
     # Имя образа. Здесь мы используем базу данных Postgres
     image: postgres:latest
     environment:
