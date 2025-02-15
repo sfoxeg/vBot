@@ -1,20 +1,12 @@
-# Определяем список сервисов — services
-# Эти сервисы будут частью нашего приложения
 services:
-
-  app: # Имя сервиса
+  app:
     container_name: vbot-app
     restart: always
     stop_signal: SIGINT
     build:
-      # Контекст для сборки образа,
-      # в данном случае, текущая директория
       context: .
-      # Имя Docker-файла из которого будет собран образ
       dockerfile: Dockerfile
-      # Команда, которая будет выполнена после старта сервиса
     entrypoint: [ "sh", "-c", "alembic upgrade head && python3 ./src/main.py" ]
-
     environment: # Заполняем переменные окружения
       BOT_TOKEN: ${BOT_TOKEN}
       DB_HOST: ${DB_HOST}
@@ -22,28 +14,20 @@ services:
       DB_NAME: ${DB_NAME}
       DB_USER: ${DB_USER}
       DB_PASS: ${DB_PASS}
-    # Перечисляем тома (volumes)
-    # Они будут подключены к файловой системе сервиса
-    # Например, все что находится в . мы увидим в директории /app
     volumes:
-      # Текущая директория пробрасывается в директорию /app внутри контейнера
-      # Путь внутри контейнера (после двоеточия) обязательно должен быть абсолютным
       - ".:/app"
       - "/tmp:/tmp"
-    # Сервис будет запущен, только после старта db
     depends_on:
       - vbot-db
 
   vbot-db:
     container_name: vbot-db
     restart: always
-    # Имя образа. Здесь мы используем базу данных Postgres
     image: postgres:latest
     hostname: postgres
     ports:
       - "5432:5432"
     environment:
-      # А так задаются переменные окружения
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASS}
