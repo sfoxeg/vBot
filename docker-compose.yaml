@@ -4,6 +4,8 @@ services:
 
   app: # Имя сервиса
     container_name: vbot-app
+    restart: always
+    stop_signal: SIGINT
     build:
       # Контекст для сборки образа,
       # в данном случае, текущая директория
@@ -34,6 +36,7 @@ services:
 
   vbot-db:
     container_name: vbot-db
+    restart: always
     # Имя образа. Здесь мы используем базу данных Postgres
     image: postgres:latest
     hostname: postgres
