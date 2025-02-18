@@ -20,6 +20,8 @@ class UsersOrm(Base):
     desc: Mapped[str | None]
     photo: Mapped[str | None]
     search_setting: Mapped["SearchSettingsOrm"] = relationship(back_populates="user", uselist=False, lazy="selectin")
+    baned: Mapped[bool] = mapped_column(server_default=text("false"))
+    admin_notice: Mapped[str | None]
     created_at: Mapped[created_at]
     updated_at: Mapped[updated_at]
 
